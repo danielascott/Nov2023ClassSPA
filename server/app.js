@@ -60,6 +60,7 @@ app.get("/status", (request, response) => {
   response.status(200).json({ message: "Service healthy" });
 });
 
+// this is purely an example of showing off request parameters
 app.get("/weather/:city", (request, response) => {
   // Express adds a "params" Object to requests that has an matches parameter created using the colon syntax
   const city = request.params.city;
