@@ -22,4 +22,49 @@ router.post("/", async (request, response) => {
   }
 });
 
+// Get all pizzas route
+router.get("/", async (request, response) => {
+  try {
+    // Store the query params into a JavaScript Object
+    const query = request.query; // Defaults to an empty object {}
+
+    const data = await Pizza.find(query);
+
+    response.json(data);
+  } catch (error) {
+    // Output error to the console incase it fails to send in response
+    console.log(error);
+
+    return response.status(500).json(error.errors);
+  }
+});
+
+// Get a single pizza by ID
+router.get("/:id", async (request, response) => {
+  try {
+    const data = await Pizza.findById(request.params.id);
+
+    response.json(data);
+  } catch (error) {
+    // Output error to the console incase it fails to send in response
+    console.log(error);
+
+    return response.status(500).json(error.errors);
+  }
+});
+
+// Delete a pizza by ID
+router.delete("/:id", async (request, response) => {
+  try {
+    const data = await Pizza.findByIdAndRemove(request.params.id, {});
+
+    response.json(data);
+  } catch (error) {
+    // Output error to the console incase it fails to send in response
+    console.log(error);
+
+    return response.status(500).json(error.errors);
+  }
+});
+
 export default router;
